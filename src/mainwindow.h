@@ -26,7 +26,8 @@ public:
   explicit MainWindow(QWidget *parent = 0);
   ~MainWindow();
 
-  virtual void setVisible(bool visible);
+protected:
+  virtual void closeEvent(QCloseEvent *event);
 
 private:
   Ui::MainWindow *ui;

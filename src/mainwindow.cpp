@@ -60,11 +60,10 @@ MainWindow::MainWindow(QWidget *parent) :
           SLOT(aboutProject()));
 }
 
-void MainWindow::setVisible(bool visible)
+void MainWindow::closeEvent(QCloseEvent *event)
 {
-  QWidget::setVisible(visible);
-  if (!visible)
-    qApp->quit();
+  QMainWindow::closeEvent(event);
+  qApp->quit();
 }
 
 void MainWindow::childDestroyed(QObject *obj)
