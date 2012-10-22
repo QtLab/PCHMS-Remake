@@ -1,7 +1,5 @@
 #include "topwidget.h"
 
-#include <QKeyEvent>
-
 TopWidget::TopWidget(QWidget *parent) :
     QWidget(parent)
 {
@@ -19,14 +17,5 @@ void TopWidget::setOnTop(bool top)
   {
     setWindowFlags(Qt::FramelessWindowHint | Qt::Window);
     show();
-  }
-}
-
-void TopWidget::keyReleaseEvent(QKeyEvent *event)
-{
-  if (event->key() == Qt::Key_F2)
-  {
-    bool top = (windowFlags() & Qt::WindowStaysOnTopHint) == Qt::WindowStaysOnTopHint;
-    setOnTop(!top);
   }
 }

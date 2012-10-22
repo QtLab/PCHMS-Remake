@@ -16,8 +16,6 @@ class TopWidget : public QWidget
 public:
   TopWidget(QWidget *parent=NULL);
 
-  virtual void keyReleaseEvent(QKeyEvent *event);
-
 public slots:
   /**
    * @brief Slot to set whether this widget should be on the top.
