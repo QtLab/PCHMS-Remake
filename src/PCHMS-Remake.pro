@@ -40,7 +40,8 @@ SOURCES += main.cpp\
     aboutprojectdialog.cpp \
     operationlistview.cpp \
     suggestion.cpp \
-    suggestionview.cpp
+    suggestionview.cpp \
+    topwidget.cpp
 
 HEADERS  += mainwindow.h \
     win32systemcall.h \
@@ -73,7 +74,8 @@ HEADERS  += mainwindow.h \
     aboutprojectdialog.h \
     operationlistview.h \
     suggestion.h \
-    suggestionview.h
+    suggestionview.h \
+    topwidget.h
 
 FORMS    += mainwindow.ui \
     inadaywidget.ui \
