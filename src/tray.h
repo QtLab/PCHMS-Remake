@@ -33,6 +33,16 @@ private:
   QMenu *trayIconMenu;
 
   /**
+   * Timer to flush.
+   */
+  QTimer *timer;
+
+  /**
+   * The current date.
+   */
+  QDate date;
+
+  /**
    * @brief Create the tray icon and the menu.
    */
   void createTrayIcon();
@@ -41,16 +51,6 @@ private:
    * @brief Connect the hook.
    */
   void connectHook();
-
-  /**
-   * @brief Timer to flush.
-   */
-  QTimer *timer;
-
-  /**
-   * @brief The current date.
-   */
-  QDate date;
 
 private slots:
   /**
