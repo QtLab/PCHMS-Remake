@@ -205,7 +205,7 @@ void GlobalChart::recalculate(Statistic *statistic)
   for (int i = 0;i < 4;++i)
     charts[i]->setValues(v[i], t[i]);
   setAxisMaxMinor(QwtPlot::xBottom, statistics.size());
-  setAxisScale(xBottom, xFrom - 0.5, xTo + 0.5, 1.0);
+  setAxisScale(xBottom, xFrom - 0.5, xTo + 0.5, 5.0);
   setAxisScale(yLeft, 0, lMax * 1.2);
   setAxisScale(yRight, 0, rMax * 1.2);
   replot();

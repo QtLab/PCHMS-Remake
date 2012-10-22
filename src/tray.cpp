@@ -41,14 +41,14 @@ void Tray::connectHook()
 
 void Tray::createTrayIcon()
 {
-  quitAction = new QAction(QString::fromUtf8("退出"), this);
-  connect(quitAction, SIGNAL(triggered()), SLOT(quit()));
-
   installAction = new QAction(QString::fromUtf8("开始记录"), this);
   connect(installAction, SIGNAL(triggered()), SLOT(install()));
 
   uninstallAction = new QAction(QString::fromUtf8("暂停记录"), this);
   connect(uninstallAction, SIGNAL(triggered()), SLOT(uninstall()));
+
+  quitAction = new QAction(QString::fromUtf8("退出"), this);
+  connect(quitAction, SIGNAL(triggered()), SLOT(quit()));
 
   trayIconMenu = new QMenu();
   trayIconMenu->addSeparator();
