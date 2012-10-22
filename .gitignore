@@ -4,3 +4,5 @@ release/QtCore4.dll
 release/QtGui4.dll
 release/QtSvg4.dll
 release/qwt.dll
+src/PCHMS-Remake.pro.user
+PCHMS-Remake-build-desktop
