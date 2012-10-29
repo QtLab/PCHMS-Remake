@@ -8,6 +8,11 @@
 #include <Windows.h>
 #include <tlhelp32.h>
 
+/**
+ * @brief Get the name of a process.
+ *
+ * @param pid The progress id.
+ */
 QString getProcessNameByPid(DWORD pid)
 {
   QString name;
@@ -28,6 +33,39 @@ QString getProcessNameByPid(DWORD pid)
   }
   CloseHandle(hSnapShot);
   return name;
+}
+
+static DEVMODE devModeBackup;
+
+/**
+ * @brief Record the dev mode.
+ */
+void recordDevMode()
+{
+  EnumDisplaySettings(NULL, -1, &devModeBackup);
+}
+
+/**
+ * @brief Resize the screen.
+ *
+ * @param width The width.
+ * @param width The height.
+ */
+void resize(DWORD width, DWORD height)
+{
+  DEVMODE devMode;
+  EnumDisplaySettings(NULL, -1, &devMode);
+  devMode.dmPelsWidth = width;
+  devMode.dmPelsHeight = height;
+  ChangeDisplaySettings(&devMode, CDS_UPDATEREGISTRY);
+}
+
+/**
+ * @brief Restore the dev mode.
+ */
+void restoreDevMode()
+{
+  ChangeDisplaySettings(&devModeBackup, CDS_UPDATEREGISTRY);
 }
 
 #endif // WIN32
