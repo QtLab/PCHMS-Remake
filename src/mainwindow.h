@@ -94,6 +94,16 @@ private slots:
   void zoomOut();
 
   /**
+   * @brief A slot to move to last month/year.
+   */
+  void last();
+
+  /**
+   * @brief A slot to move to next month/year.
+   */
+  void next();
+
+  /**
    * @brief A slot to show things about author.
    */
   void aboutAuthor();

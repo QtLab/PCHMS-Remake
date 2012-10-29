@@ -24,10 +24,13 @@ public:
 
 protected:
   virtual void widgetMousePressEvent(QMouseEvent *event);
+  virtual void widgetWheelEvent(QWheelEvent *event);
 
 signals:
   void zoomIn(int x);
   void zoomOut();
+  void last();
+  void next();
 };
 
 /**
@@ -81,6 +84,8 @@ private:
 signals:
   void zoomOut();
   void zoomIn(int x);
+  void last();
+  void next();
 
 private slots:
   void showItem(QwtPlotItem *item, bool visible);

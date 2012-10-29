@@ -1,6 +1,7 @@
 #include "globalchart.h"
 
 #include <QMouseEvent>
+#include <QWheelEvent>
 #include <qwt_legend.h>
 #include <qwt_legend_item.h>
 #include <qwt_plot_canvas.h>
@@ -40,6 +41,14 @@ void XPicker2::widgetMousePressEvent(QMouseEvent *event)
   {
     emit zoomOut();
   }
+}
+
+void XPicker2::widgetWheelEvent(QWheelEvent *event)
+{
+  if (event->delta() > 0)
+    emit last();
+  else if (event->delta() < 0)
+    emit next();
 }
 
 /**
@@ -135,6 +144,12 @@ GlobalChart::GlobalChart(QWidget *parent) :
   connect(picker2,
           SIGNAL(zoomOut()),
           SIGNAL(zoomOut()));
+  connect(picker2,
+          SIGNAL(last()),
+          SIGNAL(last()));
+  connect(picker2,
+          SIGNAL(next()),
+          SIGNAL(next()));
 }
 
 QSize	GlobalChart::sizeHint() const

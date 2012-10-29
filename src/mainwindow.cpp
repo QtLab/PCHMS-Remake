@@ -43,6 +43,12 @@ MainWindow::MainWindow(QWidget *parent) :
   connect(ui->globalChart,
           SIGNAL(zoomOut()),
           SLOT(zoomOut()));
+  connect(ui->globalChart,
+          SIGNAL(last()),
+          SLOT(last()));
+  connect(ui->globalChart,
+          SIGNAL(next()),
+          SLOT(next()));
 
   connect(ui->exitAction,
           SIGNAL(triggered()),
@@ -117,7 +123,7 @@ Statistic *MainWindow::getCurrentStatistic()
       }
     }
     // Should have a sub one, but there's no sub one.
-    if (tmp == NULL)
+    if (currentStatistic != tmp)
       return NULL;
   }
   return currentStatistic;
@@ -143,6 +149,7 @@ QString MainWindow::getDateString(Statistic *statistic)
 
 void MainWindow::recalculate()
 {
+  // TODO: set window title
   Statistic *currentStatistic = getCurrentStatistic();
   if (currentStatistic == NULL)
     return;
@@ -306,9 +313,71 @@ void MainWindow::zoomOut()
     {
       currentLevel = (Statistic::StatisticLevel) (currentLevel - 1);
       recalculate();
+      break;
     }
   default:
     break;
+  }
+}
+
+void MainWindow::last()
+{
+  QDate newDate = currentDate;
+  switch (currentLevel)
+  {
+  case Statistic::Year:
+    {
+      newDate.setDate(currentDate.year() - 1, 12, 31);
+      break;
+    }
+  case Statistic::Month:
+    {
+      if (currentDate.month() == 0)
+        newDate.setDate(currentDate.year() - 1, 12, 31);
+      else
+      {
+        newDate.setDate(currentDate.year(), currentDate.month() - 1, 1);
+        newDate.setDate(newDate.year(), newDate.month(), newDate.daysInMonth());
+      }
+      break;
+    }
+  default:
+    break;
+  }
+  if (newDate.daysTo(statistics->getStartDate()) <= 0 &&
+      newDate.daysTo(statistics->getEndDate()) >= 0)
+  {
+    currentDate = newDate;
+    recalculate();
+  }
+}
+
+void MainWindow::next()
+{
+  QDate newDate = currentDate;
+  switch (currentLevel)
+  {
+  case Statistic::Year:
+    {
+      newDate.setDate(currentDate.year() + 1, 1, 1);
+      break;
+    }
+  case Statistic::Month:
+    {
+      if (currentDate.month() == 12)
+        newDate.setDate(currentDate.year() + 1, 1, 1);
+      else
+        newDate.setDate(currentDate.year(), currentDate.month() + 1, 1);
+      break;
+    }
+  default:
+    break;
+  }
+  if (newDate.daysTo(statistics->getStartDate()) <= 0 &&
+      newDate.daysTo(statistics->getEndDate()) >= 0)
+  {
+    currentDate = newDate;
+    recalculate();
   }
 }
 
